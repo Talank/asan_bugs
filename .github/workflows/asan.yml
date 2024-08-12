@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: compile with c
         run: |
-          gcc -g -fsanitize=address -o t t.c
+          g++ -o t t.cpp -fsanitize=address
           while true; do ASAN_OPTIONS=sleep_before_dying=1000 ./t 2>&1 | tee -a log;done
           cat log | grep -A 1 "ERROR: AddressSanitizer"
           cat log
